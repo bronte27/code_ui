@@ -1,0 +1,85 @@
+<div class=" d-none d-sm-block" style="height: 50px"></div>
+<form [formGroup]="contactForm" (submit)="submit()">
+    <h1>Please enter your contact details</h1>
+  <div class="form-group row">
+    <label for="contact_name" class="col-sm-3 col-form-label">Contact Name:</label>
+    <div class="col-sm-9">
+      <input formControlName="contactName" id="contactName" name="contactName" type="text" class="form-control here" >
+      <span class="form-text text-danger" *ngIf="contactForm.get('contactName').touched && !contactForm.get('contactName').valid">
+        <span *ngIf="contactForm.get('contactName').errors.required">Please enter a valid Contact Name</span>
+        <span *ngIf="contactForm.get('contactName').errors.minlength">Contact Name must be a minimum of 3 characters</span>
+      </span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="phone_number" class="col-sm-3 col-form-label">Phone Number:</label>
+    <div class="col-sm-9">
+      <input formControlName="phoneNumber" name="phoneNumber" id="phone_number" name="phone_number" type="text" class="form-control here">
+      <div class="form-text text-danger" *ngIf="contactForm.get('phoneNumber').touched && !contactForm.get('phoneNumber').valid">
+        <div *ngIf="contactForm.get('phoneNumber').errors.required">Phone Number is required</div>
+        <div *ngIf="contactForm.get('phoneNumber').errors.pattern">Invalid Phone Number. Only numbers, brackets "()", spaces " " and dashes "-" allowed </div>
+      </div>
+    </div>
+  </div>
+  <div formGroupName="emails">
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 col-form-label">Email:</label>
+      <div class="col-sm-9">
+        <input formControlName="email" name="email" id="email" type="text" class="form-control here">
+        <div class="form-text text-danger" *ngIf="contactForm.get('emails.email').touched && !contactForm.get('emails.email').valid">
+          <div *ngIf="contactForm.get('emails.email').errors.required">Email is required</div>
+          <div *ngIf="contactForm.get('emails.email').errors.pattern">Invalid email</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="validate_email" class="col-sm-3 col-form-label">Re-Type Email:</label>
+      <div class="col-sm-9">
+        <input formControlName="validateEmail" name="validateEmail" id="validate_email" name="validateEmail" type="text" class="form-control here"
+          required>
+        <div class="form-text text-danger" *ngIf="contactForm.get('emails').touched && !contactForm.get('emails').valid">
+          <div *ngIf="contactForm.get('emails.validateEmail').errors.mismatchedEmails">Please enter a matching email</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="codeData.codeType=='child_reg'">
+    <div class="form-group row">
+      <label class="col-sm-3">Number of children at centre:</label>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input formControlName="numChildren" name="numChildren" type="radio" class="form-check-input" value="1"> 1
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input formControlName="numChildren" name="numChildren" type="radio" class="form-check-input" value="2"> 2
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input formControlName="numChildren" name="numChildren" type="radio" class="form-check-input" value="3"> 3
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input formControlName="numChildren" name="numChildren" type="radio" class="form-check-input" value="4"> 4
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-text text-muted">
+    <p>We'll never share your phone number or email with anyone else.  We only use the information you provide above to contact you regarding your childern's photos.  </p>
+    <p>If you would like to be added to our mailing list for family photos, please tick the box on the confirmation page.</p>
+  </div>
+
+    <div class="offset-sm-3 col-sm-9">
+      <button  (click)="back()" name="back" type="button" class="btn btn-primary">Back</button>
+      <button [disabled]="!contactForm.valid" name="submit" type="submit" class="btn btn-primary">Next</button>
+    </div>
+
+</form>

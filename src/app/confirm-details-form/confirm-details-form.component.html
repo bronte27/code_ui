@@ -1,0 +1,108 @@
+<div class=" d-none d-sm-block" style="height: 50px"></div>
+
+<div class="row">
+  <h1 class="code-header">Please confirm the following details are correct</h1>
+</div>
+
+<h2>Contact Details</h2>
+<div class="form-group">
+  <div class="row col-form-label">
+    <strong class="col-sm-3">Contact Name:</strong>
+    <div class="col-sm-9">
+      {{contact.contactName}}
+    </div>
+  </div>
+  <div class="row col-form-label">
+    <strong class="col-sm-3">Phone Number:</strong>
+    <div class="col-sm-9 ">
+      {{contact.phoneNumber}}
+    </div>
+  </div>
+  <div class="row col-form-label">
+    <strong class="col-sm-3">Email:</strong>
+    <div class="col-sm-9">
+      {{contact.emails.email}}
+    </div>
+  </div>
+</div>
+
+
+<div *ngFor="let child of children; let i = index">
+  <div *ngIf="moreThanOneChild;else one_child">
+    <h2>Child {{i+1}} Details</h2>
+  </div>
+  <ng-template #one_child>
+    <h2>Child Details</h2>
+  </ng-template>
+
+  <div class="form-group">
+    <div class="row col-form-label">
+      <strong class="col-sm-3">Name:</strong>
+      <div class="col-sm-9">
+        {{child.firstName}} {{child.surname}}
+      </div>
+    </div>
+
+
+    <div class="row col-form-label">
+      <strong class="col-sm-3">Group:</strong>
+      <div class="col-sm-9">
+        {{child.group | getName: groups}}
+      </div>
+    </div>
+
+
+    <div class="row col-form-label">
+      <strong class="col-sm-3">Days:</strong>
+      <div class="col-sm-9">
+        {{child.days | convertDays}}
+      </div>
+    </div>
+
+
+
+    <div [hidden]="!siblings" class="row col-form-label">
+      <label for="siblings" class="col-sm-3 col-form-label">
+        <strong>Bringing siblings:</strong>
+      </label>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <label for="" class="form-check-label">
+            <input [checked]="child.siblings" disabled type="checkbox" class="form-check-input" value="siblings">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-form-label">
+      <strong for="info" class="col-sm-3">Other information:</strong>
+      <div class="col-sm-9">
+        <div *ngIf="child.info;else other_content">
+          {{ child.info }}
+        </div>
+        <ng-template #other_content>
+          <i>none</i>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="confirmForm" (submit)="submit()">
+
+  <div class="form-group row">
+
+    <div class="form-check">
+      <label class="offset-sm-3 form-check-label">
+        <input class="form-check-input" formControlName="mailingList" name="mailingList" type="checkbox" value="mailingList"> Please add me to your mailing list
+      </label>
+    </div>
+  </div>
+
+  <div class="row col-form-label">
+    <div class="offset-sm-3 col-sm-9">
+      <button (click)="navBack()" name="back" type="button" class="btn btn-primary">Back</button>
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>

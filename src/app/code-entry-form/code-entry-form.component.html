@@ -1,0 +1,22 @@
+<div class=" d-none d-sm-block" style="height: 50px">
+</div>
+<form [formGroup]="codeForm" (submit)="submit(codeForm.value)">
+  <h1 class="code-header">Please enter the code provided</h1>
+  <div class="form-group row">
+    <label for="code" class="col-sm-3 col-form-label">Enter Code:</label>
+    <div class="col-sm-9">
+      <input [value]="code" formControlName="code" id="code" type="text" class="form-control">
+      <div *ngIf="codeForm.get('code').touched && !codeForm.get('code').valid">
+        <div *ngIf="codeForm.get('code').errors.required" class="form-text text-danger">Please enter a valid code</div>
+        <div *ngIf="codeForm.get('code').errors.invalidCode" class="form-text text-danger">{{ codeForm.get('code').errors.invalidCode.message }}</div>
+        <div *ngIf="codeForm.get('code').errors.unknownError" class="form-text text-danger">Unknown error has occured.  If this error persists please contact us. (Err: {{ codeForm.get('code').errors.unknownError.code }})</div>
+        </div>
+      <span class="form-text text-danger" *ngIf="invalidCode && codeForm.get('code').valid">Unknown error has occured.  If this error persists please contact us.</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-3 col-sm-9">
+      <button [disabled]="!codeForm.valid" name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
