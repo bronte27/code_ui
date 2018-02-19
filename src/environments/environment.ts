@@ -5,7 +5,6 @@
 
 export const environment = {
   production: false,
-  //apiPath: 'http://435gdfg.cdg/code/admin/api/'
   apiPath: 'https://192.168.1.121/code/api/'
 
 };
