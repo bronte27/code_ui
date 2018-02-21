@@ -1,6 +1,6 @@
 <div class=" d-none d-sm-block" style="height: 50px"></div>
 <form [formGroup]="childEntryForm" #f="ngForm" (ngSubmit)="submit(f)">
-  <h1 class="code-header" [innerHTML]="headingText" ></h1>
+  <h1 class="code-header" [innerHTML]="headingText"></h1>
   <div class="form-group row">
     <label for="first_name" class="col-sm-3 col-form-label">First Name:</label>
     <div class="col-sm-9">
@@ -25,6 +25,7 @@
     <label for="group" class="col-sm-3 col-form-label">Group:</label>
     <div class="col-sm-9">
       <select formControlName="group" id="group" name="group" class="form-control custom-select here" required>
+        <option value=""></option>
         <option *ngFor="let group of groups" value="{{ group.id }}">{{ group.name }}</option>
       </select>
       <div class="form-text" *ngIf="childEntryForm.get('group').touched && !childEntryForm.get('group').valid">
@@ -70,15 +71,27 @@
 
 
   <div [hidden]="!siblings" class="form-group row">
-    <label for="siblings" class="col-sm-3 col-form-label">Do you intend to bring additional siblings for photos?</label>
+    <div class="col-sm-3"></div>
     <div class="col-sm-9">
       <div class="form-check form-check-inline">
-        <label for="" class="form-check-label">
-          <input formControlName="siblings" name="siblings" type="checkbox" class="form-check-input" value="sibblings">
-      </label>
+        <label class="form-check-label">
+          <input formControlName="siblings" name="siblings" type="checkbox" class="form-check-input" value="siblings"> Do you intend to bring additional siblings for photos?
+        </label>
       </div>
     </div>
   </div>
+
+  <div [hidden]="!friends" class="form-group row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input formControlName="friends" name="friends" type="checkbox" class="form-check-input" value="friends"> Would you like photos taken with friends?
+          </label>
+        </div>
+        <div *ngIf="childEntryForm.get('friends').value">Please add the details below</div>
+      </div>
+    </div>
 
   <div class="form-group row">
     <label for="info" class="col-sm-3 col-form-label">Any other relevant information:</label>

@@ -37,6 +37,7 @@ export class ChildEntryFormComponent implements OnInit {
       'fri': new FormControl('', )
     }, DaysValidator.dayMustBeSelected),
     'siblings': new FormControl('', ),
+    'friends': new FormControl('', ),
     'info': new FormControl('', ),
   })
 
@@ -63,7 +64,7 @@ export class ChildEntryFormComponent implements OnInit {
 
   ngOnInit() {
     this.siblings = this.codeData.siblings;
-    this.friends = this.codeData.siblings;
+    this.friends = this.codeData.friends;
     this.groups = this.codeData.groups;
     this.route.paramMap
       .subscribe(params => {

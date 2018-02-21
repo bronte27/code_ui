@@ -54,7 +54,7 @@ export function tokenGetter() {
       { path: 'childentry/:child', component: ChildEntryFormComponent, canActivate: [AuthGuard] },
       { path: 'confirmdetails', component: ConfirmDetailsFormComponent, canActivate: [AuthGuard] },
       { path: 'thankyou', component: ThankYouFormComponent, canActivate: [AuthGuard] },
-      { path: '**', component: CodeEntryFormComponent }
+      { path: '**', redirectTo: 'codeentry', pathMatch: 'full'  }
     ]),
     HttpClientModule,
     JwtModule.forRoot({
