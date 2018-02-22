@@ -74,6 +74,19 @@
       </div>
     </div>
 
+    <div [hidden]="!friends" class="row col-form-label">
+      <label for="friends" class="col-sm-3 col-form-label">
+        <strong>Photos with friends:</strong>
+      </label>
+      <div class="col-sm-9">
+        <div class="form-check form-check-inline">
+          <label for="" class="form-check-label">
+            <input [checked]="child.friends" disabled type="checkbox" class="form-check-input" value="friends">
+          </label>
+        </div>
+      </div>
+    </div>
+
     <div class="row col-form-label">
       <strong for="info" class="col-sm-3">Other information:</strong>
       <div class="col-sm-9">

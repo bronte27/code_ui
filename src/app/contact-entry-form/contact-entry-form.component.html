@@ -38,8 +38,8 @@
         <input formControlName="validateEmail" name="validateEmail" id="validate_email" name="validateEmail" type="text" class="form-control here"
           required>
         <div class="form-text text-danger" *ngIf="contactForm.get('emails').touched && !contactForm.get('emails').valid">
-          <div *ngIf="contactForm.get('emails.validateEmail').errors.mismatchedEmails">Please enter a matching email</div>
-        </div>
+          <div *ngIf="!contactForm.get('emails.validateEmail').valid && contactForm.get('emails.validateEmail').errors.mismatchedEmails">Please enter a matching email</div>
+        </div> 
 
       </div>
     </div>
